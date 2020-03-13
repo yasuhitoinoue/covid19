@@ -26,7 +26,7 @@
         target="_blank"
         rel="noopener"
       >
-        出典：三重県Webサイト
+        愛知県内の発生状況について
         <v-icon class="ExternalLinkIcon" size="15">
           mdi-open-in-new
         </v-icon>

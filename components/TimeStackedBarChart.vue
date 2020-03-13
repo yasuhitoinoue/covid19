@@ -1,5 +1,5 @@
 <template>
-  <data-view :title="title" :title-id="titleId" :date="date" :url="url">
+  <data-view :title="title" :title-id="titleId" :date="date">
     <template v-slot:button>
       <p class="Graph-Desc">
         （注）同一の対象者について複数の検体を調査する場合あり
@@ -69,11 +69,6 @@ export default {
       type: String,
       required: false,
       default: ''
-    },
-    url: {
-      type: String,
-      required: false,
-      default: ''
     }
   },
   data() {
@@ -97,7 +92,7 @@ export default {
       }
     },
     displayData() {
-      const colorArray = ['#ff8d5b', '#fcb190']
+      const colorArray = ['#a83945', '#f39da5']
       if (this.dataKind === 'transition') {
         return {
           labels: this.labels,
@@ -138,10 +133,10 @@ export default {
             label: tooltipItem => {
               const labelText =
                 this.dataKind === 'transition'
-                  ? `${sumArray[tooltipItem.index]}${unit}（県内: ${
+                  ? `${sumArray[tooltipItem.index]}${unit}（都内: ${
                       data[0][tooltipItem.index]
                     }/その他: ${data[1][tooltipItem.index]}）`
-                  : `${cumulativeSumArray[tooltipItem.index]}${unit}（県内: ${
+                  : `${cumulativeSumArray[tooltipItem.index]}${unit}（都内: ${
                       cumulativeData[0][tooltipItem.index]
                     }/その他: ${cumulativeData[1][tooltipItem.index]}）`
               return labelText

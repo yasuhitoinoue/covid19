@@ -1,14 +1,14 @@
 {
-    "newsItems": [
+  "newsItems": [
     {
-        "date": "2020/03/12",
-        "url": "https://www.pref.mie.lg.jp/YAKUMUS/HP/m0068000067_00006.htm",
-        "text": "新型コロナウイルス感染症に関する知事から県民へのメッセージ（３月１２日）"
+      "date": "2020/03/11",
+      "url": "https://www.pref.aichi.jp/soshiki/kenkotaisaku/pressrelease-ncovkensa200311.html",
+      "text": "新型コロナウイルスの遺伝子検査件数について"
     },
     {
-        "date": "2020/03/12",
-        "url": "https://www.pref.mie.lg.jp/YAKUMUS/HP/m0068000071_00014.htm",
-        "text": "新型コロナウイルス感染症患者の発生について（２例目）"
+      "date": "2020/03/11",
+      "url": "https://www.pref.aichi.jp/soshiki/koho/20200311.html",
+      "text": "愛知県内の新型コロナウイルス感染症の現状についての知事記者会見動画を配信しました"
     }
-    ]
+  ]
 }

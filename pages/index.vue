@@ -12,7 +12,7 @@
         <svg-card
           title="検査陽性者の状況"
           :title-id="'details-of-confirmed-cases'"
-          :date="Data.inspections_summary.date"
+          :date="headerItem.date"
         >
           <confirmed-cases-table v-bind="confirmedCases" />
         </svg-card>
@@ -20,30 +20,18 @@
       -->
       <v-col cols="12" md="6" class="DataCard">
         <time-bar-chart
-          title="陽性患者が確認された件数"
+          title="陽性患者数"
           :title-id="'number-of-confirmed-cases'"
           :chart-id="'time-bar-chart-patients'"
           :chart-data="patientsGraph"
           :date="Data.patients.date"
-          :unit="'件'"
+          :unit="'人'"
           :url="
-            'https://www.pref.mie.lg.jp/YAKUMUS/HP/m0068000066.htm#002'
+            'https://www.pref.aichi.jp/soshiki/kenkotaisaku/novel-coronavirus.html'
           "
         />
       </v-col>
-      <v-col cols="12" md="6" class="DataCard">
-        <time-bar-chart
-          title="検査実施数"
-          :title-id="'number-of-tested-cases'"
-          :chart-id="'time-bar-chart-tested'"
-          :chart-data="inspectionsGraph"
-          :date="Data.inspections_summary.date"
-          :unit="'件'"
-          :url="
-            'https://www.pref.mie.lg.jp/YAKUMUS/HP/m0068000071_00005.htm'
-          "
-        />
-      </v-col>
+
       <v-col cols="12" md="6" class="DataCard">
         <data-table
           :title="'陽性患者の属性'"
@@ -53,11 +41,23 @@
           :date="Data.patients.date"
           :info="sumInfoOfPatients"
           :url="
-            'https://www.pref.mie.lg.jp/YAKUMUS/HP/m0068000066.htm#002'
+            'https://www.pref.aichi.jp/soshiki/kenkotaisaku/novel-coronavirus.html'
           "
         />
       </v-col>
       <!--
+      <v-col cols="12" md="6" class="DataCard">
+        <time-stacked-bar-chart
+          title="検査実施数"
+          :title-id="'number-of-tested'"
+          :chart-id="'time-stacked-bar-chart-inspections'"
+          :chart-data="inspectionsGraph"
+          :date="Data.inspections_summary.date"
+          :items="inspectionsItems"
+          :labels="inspectionsLabels"
+          :unit="'件'"
+        />
+      </v-col>
       <v-col cols="12" md="6" class="DataCard">
         <time-bar-chart
           title="新型コロナコールセンター相談件数"
@@ -82,8 +82,8 @@
       </v-col>
       <v-col cols="12" md="6" class="DataCard">
         <metro-bar-chart
-          title="都営地下鉄の利用者数の推移"
-          :title-id="'predicted-number-of-toei-subway-passengers'"
+          title="名古屋市営地下鉄の利用者数の推移"
+          :title-id="'predicted-number-of-nagoya-subway-passengers'"
           :chart-id="'metro-bar-chart'"
           :chart-data="metroGraph"
           :chart-option="metroGraphOption"
@@ -98,10 +98,10 @@
 <script>
 import PageHeader from '@/components/PageHeader.vue'
 import TimeBarChart from '@/components/TimeBarChart.vue'
-import MetroBarChart from '@/components/MetroBarChart.vue'
-//import TimeStackedBarChart from '@/components/TimeStackedBarChart.vue'
+// import MetroBarChart from '@/components/MetroBarChart.vue'
+// import TimeStackedBarChart from '@/components/TimeStackedBarChart.vue'
 import WhatsNew from '@/components/WhatsNew.vue'
-import StaticInfo from '@/components/StaticInfo.vue'
+// import StaticInfo from '@/components/StaticInfo.vue'
 import Data from '@/data/data.json'
 import MetroData from '@/data/metro.json'
 import DataTable from '@/components/DataTable.vue'
@@ -109,19 +109,20 @@ import formatGraph from '@/utils/formatGraph'
 import formatTable from '@/utils/formatTable'
 import formatConfirmedCases from '@/utils/formatConfirmedCases'
 import News from '@/data/news.json'
-import SvgCard from '@/components/SvgCard.vue'
-import ConfirmedCasesTable from '@/components/ConfirmedCasesTable.vue'
+// import SvgCard from '@/components/SvgCard.vue'
+// import ConfirmedCasesTable from '@/components/ConfirmedCasesTable.vue'
 
 export default {
   components: {
     PageHeader,
     TimeBarChart,
-    MetroBarChart,
+    //    MetroBarChart,
+    //    TimeStackedBarChart,
     WhatsNew,
-    StaticInfo,
-    DataTable,
-    SvgCard,
-    ConfirmedCasesTable
+    //    StaticInfo,
+    DataTable
+    //    SvgCard,
+    //    ConfirmedCasesTable
   },
   data() {
     // 感染者数グラフ
@@ -129,42 +130,37 @@ export default {
     // 感染者数
     const patientsTable = formatTable(Data.patients.data)
     // 退院者グラフ
-    //const dischargesGraph = formatGraph(Data.discharges_summary.data)
+    // const dischargesGraph = formatGraph(Data.discharges_summary.data)
 
     // 相談件数
-    //const contactsGraph = formatGraph(Data.contacts.data)
+    // const contactsGraph = formatGraph(Data.contacts.data)
     // 帰国者・接触者電話相談センター相談件数
-    //const querentsGraph = formatGraph(Data.querents.data)
-    // 都営地下鉄の利用者数の推移
-    //const metroGraph = MetroData
+    // const querentsGraph = formatGraph(Data.querents.data)
+    // 名古屋市営地下鉄の利用者数の推移
+    // const metroGraph = MetroData
     // 検査実施日別状況
-    /* const inspectionsGraph = [
-      Data.inspections_summary.data['県内'],
-      Data.inspections_summary.data['その他']
-    ]
-    */
-
-   const inspectionsGraph = formatGraph(Data.inspections_summary.data)
-
-    /* const inspectionsItems = [
+    // const inspectionsGraph = [
+    //   Data.inspections_summary.data['県内'],
+    //   Data.inspections_summary.data['その他']
+    // ]
+    const inspectionsItems = [
       '県内発生（疑い例・接触者調査）',
       'その他（チャーター便・クルーズ便）'
     ]
-    */
-    //const inspectionsLabels = Data.inspections_summary.labels
+    // const inspectionsLabels = Data.inspections_summary.labels
     // 死亡者数
     // #MEMO: 今後使う可能性あるので一時コメントアウト
     // const fatalitiesTable = formatTable(
     //   Data.patients.data.filter(patient => patient['備考'] === '死亡')
     // )
     // 検査陽性者の状況
-    //const confirmedCases = formatConfirmedCases(Data.main_summary)
+    // const confirmedCases = formatConfirmedCases(Data.main_summary)
 
     const sumInfoOfPatients = {
       lText: patientsGraph[
         patientsGraph.length - 1
       ].cumulative.toLocaleString(),
-      sText: patientsGraph[patientsGraph.length - 1].label + 'までの累計',
+      sText: patientsGraph[patientsGraph.length - 1].label + 'の累計',
       unit: '人'
     }
 
@@ -172,22 +168,22 @@ export default {
       Data,
       patientsTable,
       patientsGraph,
-      //dischargesGraph,
-      //contactsGraph,
-      //querentsGraph,
-      //metroGraph,
-      inspectionsGraph,
-      //inspectionsItems,
-      //inspectionsLabels,
-      //confirmedCases,
+      // dischargesGraph,
+      // contactsGraph,
+      // querentsGraph,
+      // metroGraph,
+      // inspectionsGraph,
+      // inspectionsItems,
+      // inspectionsLabels,
+      // confirmedCases,
       sumInfoOfPatients,
       headerItem: {
         icon: 'mdi-chart-timeline-variant',
-        title: '三重県内の最新感染動向',
+        title: '愛知県内の最新感染動向',
         date: Data.lastUpdate
       },
       newsItems: News.newsItems,
-      /* metroGraphOption: {
+      metroGraphOption: {
         responsive: true,
         legend: {
           display: true
@@ -223,7 +219,7 @@ export default {
               }
             }
           ]
-        }, */
+        },
         tooltips: {
           displayColors: false,
           callbacks: {
@@ -239,13 +235,13 @@ export default {
             }
           }
         }
-    //  }
+      }
     }
     return data
   },
   head() {
     return {
-      title: '三重県内の最新感染動向'
+      title: '県内の最新感染動向'
     }
   }
 }

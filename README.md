@@ -1,9 +1,19 @@
-# 三重県 新型コロナウイルス感染症対策サイト
-[![Mie Prefecture COVID-19 Task Force website](https://user-images.githubusercontent.com/47916753/76599982-6f25fd00-6549-11ea-9fcb-87034c0b68a5.png)](https://covid19-mie.netlify.com/)
+# 愛知県 新型コロナウイルス感染症対策サイト
 
-### 日本語 | [English](./README_EN.md) | [Spanish](./README_ES.md) | [Korean](./README_KO.md) | [Chinese (Taiwan)](./README_ZH_TW.md) | [Chinese (Simplified)](./README_ZH_CN.md)
+![](https://github.com/code4nagoya/covid19/workflows/production%20deploy/badge.svg)
 
-これは、三重県の高専生有志チームが開発した、東京都の新型コロナウイルス感染症対策サイトの三重版です。東京都新型コロナウイルス対策サイトのリポジトリからフォークしています。
+[![愛知県 新型コロナウイルス感染症対策サイト](https://scontent-lax3-1.xx.fbcdn.net/v/t1.0-9/89384411_3894244213920910_6080693635433627648_o.jpg?_nc_cat=101&_nc_sid=ca434c&_nc_ohc=3nng60TwA4gAX_zj-mW&_nc_ht=scontent-lax3-1.xx&oh=df8364ef052034ec9dfcc629da21490b&oe=5EA5E01E)](http://stopcovid19.code4.nagoya/)
+
+### 日本語
+
+## 貢献の仕方
+Issues にあるいろいろな修正にご協力いただけると嬉しいです。
+
+詳しくは[貢献の仕方](./.github/CONTRIBUTING.md)を御覧ください。
+
+
+## 行動原則
+詳しくは[サイト構築にあたっての行動原則](./.github/CODE_OF_CONDUCT.md)を御覧ください。
 
 ## ライセンス
 本ソフトウェアは、[MITライセンス](./LICENSE.txt)の元提供されています。
@@ -29,10 +39,8 @@ $ yarn dev
 $ docker-compose up --build
 ```
 
-### ステージング・本番環境への反映
+### 開発・本番環境への反映
 
-`master` ブランチがアップデートされると、自動的に `production` ブランチにHTML類がbuildされます。そして、本番サイト https://stopcovid19.metro.tokyo.lg.jp/ が更新されます。
+`master` ブランチがアップデートされると、自動的に `production` ブランチにHTML類がbuildされます。そして、本番サイト http://stopcovid19.code4.nagoya/ が更新されます。
 
-`staging` ブランチがアップデートされると、自動的に `gh-pages` ブランチにHTML類がbuildされます。そして、ステージングサイト https://stg-covid19-tokyo.netlify.com/ が更新されます。
-
-`development` ブランチがアップデートされると、自動的に `dev-pages` ブランチにHTML類がbuildされます。そして、開発用サイト https://dev-covid19-tokyo.netlify.com/ が更新されます。
+`development` ブランチがアップデートされると、自動的に `dev-pages` ブランチにHTML類がbuildされます。そして、開発用サイト https://dev-covid19-aichi.netlify.com/ が更新されます。
